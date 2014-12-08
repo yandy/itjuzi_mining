@@ -7,8 +7,27 @@
 
 import scrapy
 
+class InvesteventItem(scrapy.Item):
+  # define the fields for your item here like:
+  # name = scrapy.Field()
+  date = scrapy.Field()
+  money = scrapy.Field()
+  area = scrapy.Field()
+  turn = scrapy.Field()
+  company = scrapy.Field()
+  investfirms = scrapy.Field()
 
-class ItjuziMiningItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+class CompanyItem(scrapy.Item):
+  # define the fields for your item here like:
+  # name = scrapy.Field()
+  name = scrapy.Field()
+  url = scrapy.Field()
+  date = scrapy.Field()
+  location = scrapy.Field()
+  state = scrapy.Field()
+  area = scrapy.Field()
+  stage = scrapy.Field()
+  tags = scrapy.Field()
+  discr = scrapy.Field()
+  investevents = scrapy.Field()
+  mergeevent = scrapy.Field()
