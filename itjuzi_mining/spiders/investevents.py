@@ -22,8 +22,7 @@ class InvesteventsSpider(scrapy.Spider):
         item['turn'] = ''.join(sel.xpath('td[3]/a/text()').extract())
         item['money'] = ''.join(sel.xpath('td[4]/text()').extract())
         item['area'] = ''.join(sel.xpath('td[5]/a/text()').extract())
-        item['investfirms'] = []
-        # item['investfirms'] = sel.xpath('td[6]/a/text()').extract()
+        item['investfirms'] = sel.xpath('td[6]/a/text()').extract()
         yield item
     for link in self.link_extractor.extract_links(response):
       yield scrapy.Request(url=link.url, callback=self.parse)
