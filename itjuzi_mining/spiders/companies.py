@@ -1,4 +1,4 @@
-import scrapy, re, cPickle
+import scrapy, cPickle
 
 from itjuzi_mining.items import CompanyItem
 from itjuzi_mining.settings import REGEXS
@@ -11,9 +11,11 @@ class CompaniesSpider(scrapy.Spider):
   link_extractor = LinkExtractor(allow=REGEXS['companies_crawl_url'])
 
   def parse(self, response):
-    if REGEXS['companies_item_url'].search(response.url):
+    matched = REGEXS['companies_item_url'].search(response.url)
+    if matched:
       for sel in response.xpath("//ul[@class='detail-info']"):
         item = CompanyItem()
+        item['itid'] = int(matched.group('itid'))
         item['name'] = ''.join(sel.xpath('li[2]/em/text()').extract())
         item['url'] = ''.join(sel.xpath('li[1]/a/text()').extract())
         item['date'] = ''.join(sel.xpath('li[3]/em/text()').extract())

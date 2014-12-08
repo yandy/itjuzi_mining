@@ -27,5 +27,7 @@ DATABASE = {
 
 REGEXS = {
   'companies_crawl_url': re.compile('^http://itjuzi\.com/company\?page=\d+|http://itjuzi\.com/company/\d+'),
-  'companies_item_url': re.compile('^http://itjuzi\.com/company/\d+')
+  'companies_item_url': re.compile('^http://itjuzi\.com/company/(?P<itid>\d+)'),
+  'investevents_crawl_url': re.compile('^http://itjuzi\.com/investevents\?page=\d+'),
+  'investevents_item_url': re.compile('^http://itjuzi\.com/investevents/(?P<itid>\d+)')
 }

@@ -7,35 +7,35 @@ import settings
 DeclarativeBase = declarative_base()
 
 investfirms_investevents_table = Table('investfirms_investevents', DeclarativeBase.metadata,
-    Column('investfirms_id', Integer, ForeignKey('investfirms.id')),
-    Column('investevents_id', Integer, ForeignKey('investevents.id'))
+    Column('investfirms_id', Integer, ForeignKey('investfirms.itid')),
+    Column('investevents_id', Integer, ForeignKey('investevents.itid'))
 )
 
 class Investevent(DeclarativeBase):
     __tablename__ = "investevents"
 
-    id = Column(Integer, primary_key=True)
+    itid = Column(Integer, primary_key=True)
     date = Column(String)
     turn = Column(String)
     money = Column(String)
     area = Column(String)
-    company_id = Column(Integer, ForeignKey('companies.id'))
+    company_id = Column(Integer, ForeignKey('companies.itid'))
 
 class Mergeevent(DeclarativeBase):
     __tablename__ = 'mergeevents'
 
-    id = Column(Integer, primary_key=True)
+    itid = Column(Integer, primary_key=True)
     date = Column(String)
     money = Column(String)
     area = Column(String)
-    company_id = Column(Integer, ForeignKey('companies.id'))
-    investfirm_id = Column(Integer, ForeignKey('investfirms.id'))
+    company_id = Column(Integer, ForeignKey('companies.itid'))
+    investfirm_id = Column(Integer, ForeignKey('investfirms.itid'))
 
 class Company(DeclarativeBase):
     __tablename__ = "companies"
 
-    id = Column(Integer, primary_key=True)
-    name = Column(String, index=True, unique=True)
+    itid = Column(Integer, primary_key=True)
+    name = Column(String)
     url = Column(String)
     date = Column(String)
     location = Column(String)
@@ -50,8 +50,8 @@ class Company(DeclarativeBase):
 class Investfirm(DeclarativeBase):
     __tablename__ = "investfirms"
 
-    id = Column(Integer, primary_key=True)
-    name = Column(String, index=True, unique=True)
+    itid = Column(Integer, primary_key=True)
+    name = Column(String)
     url = Column(String)
     stages = Column(String)
     areas = Column(String)
