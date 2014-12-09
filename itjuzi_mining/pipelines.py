@@ -29,6 +29,8 @@ class ItjuziMiningPipeline(object):
           if matched:
             itid = int(matched.group('itid'))
             investfirm = session.query(Investfirm).filter(Investfirm.itid == itid).first()
+            if investfirm is None:
+              investfirm = Investfirm(itid=itid)
             it['investfirms'].append(investfirm)
         investevent = Investevent(**it)
         session.merge(investevent)
