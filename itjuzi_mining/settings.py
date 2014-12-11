@@ -8,8 +8,6 @@
 #     http://doc.scrapy.org/en/latest/topics/settings.html
 #
 
-import re
-
 BOT_NAME = 'itjuzi_mining'
 
 SPIDER_MODULES = ['itjuzi_mining.spiders']
@@ -25,9 +23,9 @@ DATABASE = {
   'database': 'itjuzi'
 }
 
-REGEXS = {
-  'companies_crawl_url': re.compile('^http://itjuzi\.com/company\?page=\d+|http://itjuzi\.com/company/\d+'),
-  'companies_item_url': re.compile('^http://itjuzi\.com/company/(?P<itid>\d+)'),
-  'investevents_crawl_url': re.compile('^http://itjuzi\.com/investevents\?page=\d+'),
-  'investevents_item_url': re.compile('^http://itjuzi\.com/investevents/(?P<itid>\d+)')
+URL_REGEXS = {
+  'company': r'^http://itjuzi\.com/company/(?P<cid>\d+)',
+  'investevent': r'^http://itjuzi\.com/investevents/(?P<ieid>\d+)',
+  'companies': r'^http://itjuzi\.com/company\?page=\d+',
+  'investevents': r'^http://itjuzi\.com/investevents\?page=\d+'
 }

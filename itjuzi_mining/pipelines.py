@@ -6,26 +6,27 @@
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 from . import Session
 from models import Company, Investevent
-from settings import REGEXS
+from items import CompanyItem, InvesteventItem
+from settings import URL_REGEXS
 
 class ItjuziMiningPipeline(object):
     def process_item(self, item, spider):
       session = Session()
-      if spider.name == 'companies':
+      if isinstance(item, CompanyItem):
         it = item.copy()
         company = Company(**it)
         session.merge(company)
         session.commit()
-      elif spider.name == 'investevents':
+      elif isinstance(item, InvesteventItem):
         it = item.copy()
         company = it.pop('company')
-        matched = REGEXS['companies_item_url'].search(company)
+        matched = URL_REGEXS['companies_item_url'].search(company)
         if matched:
           it['company_id'] = int(matched.group('itid'))
         investfirms = it.pop('investfirms')
         it['investfirms'] = []
         for ifirm in investfirms:
-          matched = REGEXS['investevents_item_url'].search(ifirm)
+          matched = URL_REGEXS['investevents_item_url'].search(ifirm)
           if matched:
             itid = int(matched.group('itid'))
             investfirm = session.query(Investfirm).filter(Investfirm.itid == itid).first()
