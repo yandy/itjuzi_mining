@@ -18,6 +18,8 @@ class InvesteventItem(scrapy.Item):
   company = scrapy.Field()
   investfirms = scrapy.Field()
 
+  ITEM_NAME = 'investevent'
+
 class CompanyItem(scrapy.Item):
   # define the fields for your item here like:
   # name = scrapy.Field()
@@ -33,3 +35,5 @@ class CompanyItem(scrapy.Item):
   discr = scrapy.Field()
   investevents = scrapy.Field()
   mergeevent = scrapy.Field()
+
+  ITEM_NAME = 'company'

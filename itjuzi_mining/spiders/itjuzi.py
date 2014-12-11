@@ -20,9 +20,11 @@ class ItjuziSpider(scrapy.Spider):
     if matched is None:
       return
     elif matched.group('cid'):
-      self._parse_company(response, id=matched.group('cid'))
+      for item in self._parse_company(response, id=matched.group('cid')):
+        yield item
     elif matched.group('ieid'):
-      self._parse_investevents(response, id=matched.group('ieid'))
+      for item in self._parse_investevents(response, id=matched.group('ieid')):
+        yield item
 
   def _parse_company(self, response, id):
     for sel in response.xpath("//ul[@class='detail-info']"):
